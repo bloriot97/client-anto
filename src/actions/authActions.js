@@ -31,6 +31,7 @@ export const signIn = (userData) => (dispatch) => {
 }
 
 export const logOut = () => (dispatch) => {
+  localStorage.setItem('token', '');
   dispatch({
     type: LOG_OUT_SUCESS,
   })

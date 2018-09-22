@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 
 import Header from '../components/Header';
 import Signin from '../components/Signin';
+import SentMessages from '../components/SentMessages';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 class App extends Component {
   render() {
@@ -13,7 +16,12 @@ class App extends Component {
         <Header
           isAuthenticated={isAuthenticated}
         />
-        <Signin/>
+        <Router>
+          <div>
+            <Route exact path="/" component={SentMessages} />
+            <Route path="/signin" component={Signin} />
+          </div>
+        </Router>
       </div>
     );
   }

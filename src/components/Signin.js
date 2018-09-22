@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux';
 
+import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -60,10 +62,19 @@ class Auth extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
+    if (this.props.isAuthenticated){
+      this.props.history.push("/");
+    }
   }
 
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value })
+  }
+  componentDidUpdate(){
+    if (this.props.isAuthenticated){
+      this.props.history.push("/");
+    }
   }
 
   onSubmit(event) {
@@ -78,6 +89,7 @@ class Auth extends Component {
   }
 
   render () {
+
     const { classes } = this.props;
     return (
       <main className={classes.root}>
@@ -123,4 +135,18 @@ class Auth extends Component {
   }
 }
 
-export default connect(null, { signIn })(withStyles(styles)(Auth));
+Auth.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+}
+
+function mapStateToProps(state) {
+
+  const { auth } = state
+  const { isAuthenticated } = auth
+
+  return {
+    isAuthenticated,
+  }
+}
+
+export default connect(mapStateToProps, { signIn })(withStyles(styles)(withRouter(Auth)));
