@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+
+import { fetchMessages } from '../actions/messagesActions'
 
 const styles = theme => ({
   root: {
@@ -24,16 +27,42 @@ class SentMessages extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.fetchMessages();
+  }
+
   render () {
     const { classes } = this.props;
+    const messages = this.props.items.map((message) => (
+      <div key={message["_id"]}>
+        <h3> {message.content} </h3>
+        <p> {message.sent_at} </p>
+        qsd
+      </div>
+    ));
     return (
       <main className={classes.root}>
         <Paper className={classes.paper}>
-          hey
+          messages
+          {messages}
         </Paper>
       </main>
     )
   }
 }
 
-export default connect(null, { })(withStyles(styles)(SentMessages));
+SentMessages.propTypes = {
+  items: PropTypes.array.isRequired,
+}
+
+function mapStateToProps(state) {
+
+  const { messages } = state
+  const { items } = messages
+
+  return {
+    items,
+  }
+}
+
+export default connect(mapStateToProps, { fetchMessages })(withStyles(styles)(SentMessages));
