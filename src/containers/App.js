@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Header from '../components/Header';
+import HomePage from '../components/HomePage';
 import Signin from '../components/Signin';
 import SentMessages from '../components/SentMessages';
+import NewMessage from '../components/NewMessage';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -18,7 +20,9 @@ class App extends Component {
         />
         <Router>
           <div>
-            <Route exact path="/" component={SentMessages} />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/messages" component={SentMessages} />
+            <Route exact path="/messages/new" component={NewMessage} />
             <Route path="/signin" component={Signin} />
           </div>
         </Router>
