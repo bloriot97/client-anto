@@ -4,7 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+
 
 import { fetchMessages } from '../actions/messagesActions'
 
@@ -12,12 +16,17 @@ const styles = theme => ({
   root: {
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 3,
     width: 'auto',
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
+    [theme.breakpoints.up(500 + theme.spacing.unit * 3 * 2)]: {
+      width: 500,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
+  },
+  card: {
+    minWidth: 300,
+    marginTop: theme.spacing.unit
   },
 });
 
@@ -34,18 +43,29 @@ class SentMessages extends Component {
   render () {
     const { classes } = this.props;
     const messages = this.props.items.map((message) => (
-      <div key={message["_id"]}>
-        <h3> {message.content} </h3>
-        <p> {message.sent_at} </p>
-        qsd
-      </div>
+      <Card key={message["_id"]} className={classes.card}>
+        <CardContent>
+          <Typography variant="headline" component="h2">
+            {message.to}
+            {message.read_at &&
+              "✅"
+            }
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            {message.sent_at}
+          </Typography>
+          <Typography component="p">
+            {message.content}
+          </Typography>
+        </CardContent>
+      </Card>
     ));
     return (
       <main className={classes.root}>
-        <Paper className={classes.paper}>
-          messages
-          {messages}
-        </Paper>
+        <Typography variant="display2" component="h2">
+          Messages envoyés
+        </Typography>
+        {messages}
       </main>
     )
   }
