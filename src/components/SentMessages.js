@@ -7,7 +7,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 
+import AddIcon from '@material-ui/icons/Add';
+
+import MessageCard from './MessageCard';
 
 
 import { fetchMessages } from '../actions/messagesActions'
@@ -24,9 +29,10 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
-  card: {
-    minWidth: 300,
-    marginTop: theme.spacing.unit
+  fab: {
+    position: 'fixed',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
   },
 });
 
@@ -41,31 +47,23 @@ class SentMessages extends Component {
   }
 
   render () {
-    const { classes } = this.props;
-    const messages = this.props.items.map((message) => (
-      <Card key={message["_id"]} className={classes.card}>
-        <CardContent>
-          <Typography variant="headline" component="h2">
-            {message.to}
-            {message.read_at &&
-              "✅"
-            }
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            {message.sent_at}
-          </Typography>
-          <Typography component="p">
-            {message.content}
-          </Typography>
-        </CardContent>
-      </Card>
-    ));
+    const { items, classes } = this.props;
+
     return (
       <main className={classes.root}>
         <Typography variant="display2" component="h2">
           Messages envoyés
         </Typography>
-        {messages}
+        {
+          items.map((message) => (
+            <MessageCard message={message} />
+          ))
+        }
+        <Tooltip title="New">
+          <Button className={classes.fab} variant="fab" color="secondary">
+            <AddIcon />
+          </Button>
+        </Tooltip>
       </main>
     )
   }

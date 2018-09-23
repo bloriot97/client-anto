@@ -27,7 +27,7 @@ class Header extends Component {
     const { isAuthenticated } = this.props;
     console.log(isAuthenticated)
     return (
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <Typography variant="title" color="inherit">
             News
@@ -35,7 +35,6 @@ class Header extends Component {
           {!isAuthenticated &&
             <Button color="inherit">Login</Button>
           }
-
           {isAuthenticated &&
             <Button onClick={this.callLogOut} color="inherit">Logout</Button>
           }
