@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, NEW_MESSAGE } from './types'
+import { FETCH_MESSAGES, NEW_MESSAGE_SENT } from './types'
 
 export const fetchMessages = () => (dispatch) => {
   fetch('http://localhost:3003/api/v1/messages', {
@@ -29,8 +29,9 @@ export const createMessage = (message) => (dispatch) => {
     },
     body: JSON.stringify(message),
   }).then((res) => res.json()).catch((err) => console.log(err))
-      .then((message) => dispatch({
-        type: NEW_MESSAGE,
-        payload: message,
-      }))
+      .then((message) => {
+        dispatch({
+          type: NEW_MESSAGE_SENT,
+        })
+      })
 }

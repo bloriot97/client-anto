@@ -60,7 +60,7 @@ class SentMessages extends Component {
           ))
         }
         <Tooltip title="New">
-          <Button className={classes.fab} variant="fab" color="secondary">
+          <Button href='./messages/new' className={classes.fab} variant="fab" color="secondary">
             <AddIcon />
           </Button>
         </Tooltip>

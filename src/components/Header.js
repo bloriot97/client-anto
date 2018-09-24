@@ -33,7 +33,7 @@ class Header extends Component {
             News
           </Typography>
           {!isAuthenticated &&
-            <Button color="inherit">Login</Button>
+            <Button href='./signin'  color="inherit">Login</Button>
           }
           {isAuthenticated &&
             <Button onClick={this.callLogOut} color="inherit">Logout</Button>
