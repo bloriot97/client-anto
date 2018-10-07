@@ -1,7 +1,8 @@
 import { FETCH_MESSAGES, NEW_MESSAGE_SENT } from './types'
+import { getUri } from '../api'
 
 export const fetchMessages = () => (dispatch) => {
-  fetch('http://localhost:3003/api/v1/messages', {
+  fetch(getUri('/messages'), {
     method: 'GET',
     headers: {
         'Accept': 'application/json',
@@ -20,7 +21,7 @@ export const fetchMessages = () => (dispatch) => {
 }
 
 export const createMessage = (message) => (dispatch) => {
-  fetch('http://localhost:3003/api/v1/messages', {
+  fetch(getUri('messages'), {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

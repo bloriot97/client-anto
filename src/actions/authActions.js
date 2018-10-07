@@ -1,8 +1,10 @@
 import { SIGN_IN_ERROR, SIGN_IN_SUCESS, LOG_OUT_SUCESS } from './types'
+import { getUri } from '../api'
+
 
 export const signIn = (userData) => (dispatch) => {
   console.log(JSON.stringify(userData))
-  fetch('http://localhost:3003/api/v1/auth/login', {
+  fetch(getUri('/auth/login'), {
     method: 'POST',
     headers: {
         'Accept': 'application/json',

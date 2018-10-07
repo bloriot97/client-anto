@@ -7,6 +7,7 @@ import HomePage from '../components/HomePage';
 import Signin from '../components/Signin';
 import SentMessages from '../components/SentMessages';
 import NewMessage from '../components/NewMessage';
+import PrivateRoute from '../components/PrivateRoute';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -21,6 +22,7 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={HomePage} />
+            <Route path="/messages" component={PrivateRoute} />
             <Route exact path="/messages" component={SentMessages} />
             <Route exact path="/messages/new" component={NewMessage} />
             <Route path="/signin" component={Signin} />
