@@ -1,0 +1,10 @@
+language: node_js
+node_js: '11'
+services:
+  - docker
+jobs:
+  include:
+    - stage: test
+      script: ./.travis/travis-run.sh
+    - stage: deploy
+      script: ./.travis/travis-deploy.sh
