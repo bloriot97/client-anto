@@ -30,9 +30,9 @@ const styles = theme => ({
 });
 
 class HomePage extends Component {
-  constructor(props) {
+  /* constructor(props) {
     super(props);
-  }
+  }*/
 
   render () {
     const { classes } = this.props;
@@ -44,7 +44,7 @@ class HomePage extends Component {
             Home
           </Typography>
           <Button href='./messages' variant="contained" color="primary" className={classes.button}>
-            MEssages envoyés 
+            MEssages envoyés
           </Button>
         </Paper>
       </main>

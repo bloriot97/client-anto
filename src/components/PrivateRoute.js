@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux';
-import { Redirect, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
+// import { Redirect, Route } from 'react-router-dom'
+// import PropTypes from 'prop-types'
 
-import SentMessages from '../components/SentMessages';
+// import SentMessages from '../components/SentMessages';
 
 
 
@@ -27,7 +27,7 @@ class PrivateRoute extends Component {
 
   render () {
     // Add your own authentication on the below line.
-    const {isAuthenticated} = this.props;
+    // const {isAuthenticated} = this.props;
 
     return null;
   }
