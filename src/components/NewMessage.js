@@ -57,6 +57,7 @@ class NewMessage extends Component {
     const message = {
       to: this.state.to,
       content: this.state.content,
+      animation: 'rainbow',
     }
     this.props.createMessage(message);
 

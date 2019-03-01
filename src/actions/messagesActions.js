@@ -21,7 +21,7 @@ export const fetchMessages = () => (dispatch) => {
 }
 
 export const createMessage = (message) => (dispatch) => {
-  fetch(getUri('messages'), {
+  fetch(getUri('/messages'), {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -30,9 +30,9 @@ export const createMessage = (message) => (dispatch) => {
     },
     body: JSON.stringify(message),
   }).then((res) => res.json()).catch((err) => console.log(err))
-      .then((message) => {
-        dispatch({
-          type: NEW_MESSAGE_SENT,
-        })
+    .then((res) => {
+      dispatch({
+        type: NEW_MESSAGE_SENT,
       })
+    })
 }
