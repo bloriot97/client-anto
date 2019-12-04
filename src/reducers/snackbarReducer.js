@@ -1,7 +1,7 @@
 import { SNACKBAR_OPEN, SNACKBAR_CLOSED } from '../actions/types'
 
 const initialState = {
-    isOpen: true,
+    isOpen: false,
     message: '',
     variant: 'success'
 }
