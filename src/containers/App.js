@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 
 import Header from '../components/Header';
 import HomePage from '../components/HomePage';
-import Signin from '../components/Signin';
+import LogIn from '../components/LogIn';
 import SentMessages from '../components/SentMessages';
 import NewMessage from '../components/NewMessage';
+import Snackbar from '../components/Snackbar';
 import PrivateRoute from '../components/PrivateRoute';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -25,9 +26,10 @@ class App extends Component {
             <Route path="/messages" component={PrivateRoute} />
             <Route exact path="/messages" component={SentMessages} />
             <Route exact path="/messages/new" component={NewMessage} />
-            <Route path="/signin" component={Signin} />
+            <Route path="/login" component={LogIn} />
           </div>
         </Router>
+        <Snackbar/>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_IN_ERROR, SIGN_IN_SUCESS, LOG_OUT_SUCESS } from '../actions/types'
+import { LOG_IN, LOG_IN_ERROR, LOG_IN_SUCESS, LOG_OUT_SUCESS } from '../actions/types'
 
 const initialState = {
   token: '',
@@ -7,16 +7,16 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type){
-    case SIGN_IN:
+    case LOG_IN:
       return {
         ...state,
       };
-    case SIGN_IN_ERROR:
+    case LOG_IN_ERROR:
       return {
         ...state,
         isAuthenticated: false,
       };
-    case SIGN_IN_SUCESS:
+    case LOG_IN_SUCESS:
       return {
         ...state,
         token: action.payload,

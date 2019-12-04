@@ -15,7 +15,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 import LockIcon from '@material-ui/icons/LockOutlined';
 
-import { signIn } from '../actions/authActions'
+import { logIn } from '../actions/authActions'
 
 const styles = theme => ({
   root: {
@@ -33,7 +33,6 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
-    'max-width' : '300px',
     marginTop: theme.spacing.unit * 8,
     display: 'flex',
     flexDirection: 'column',
@@ -47,7 +46,8 @@ const styles = theme => ({
 
   },
   submit: {
-
+    marginTop: '20px',
+    marginBottom: '20px',
   }
 });
 
@@ -85,7 +85,7 @@ class Auth extends Component {
       username: this.state.username,
       password: this.state.password,
     }
-    this.props.signIn(user);
+    this.props.logIn(user);
 
   }
 
@@ -118,7 +118,9 @@ class Auth extends Component {
               />
             </FormControl>
             <Typography variant="caption">
-              Se créer un compte.
+              {
+                //Se créer un compte.
+              }
             </Typography>
             <Button
               type="submit"
@@ -149,4 +151,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { signIn })(withStyles(styles)(withRouter(Auth)));
+export default connect(mapStateToProps, { logIn })(withStyles(styles)(withRouter(Auth)));

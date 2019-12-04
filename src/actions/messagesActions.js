@@ -1,4 +1,5 @@
 import { FETCH_MESSAGES, NEW_MESSAGE_SENT } from './types'
+import { openSnackbar } from "./snackbarActions";
 import { getUri } from '../api'
 
 export const fetchMessages = () => (dispatch) => {
@@ -11,11 +12,12 @@ export const fetchMessages = () => (dispatch) => {
     },
   }).then((res) => res.json()).catch((err) => console.log(err))
     .then((res) => {
-      console.log(res)
-      dispatch({
-        type: FETCH_MESSAGES,
-        payload: res,
-      })
+        console.log(res)
+        dispatch({
+            type: FETCH_MESSAGES,
+            payload: res,
+        })
+
 
     })
 }
@@ -31,8 +33,9 @@ export const createMessage = (message) => (dispatch) => {
     body: JSON.stringify(message),
   }).then((res) => res.json()).catch((err) => console.log(err))
     .then((res) => {
-      dispatch({
-        type: NEW_MESSAGE_SENT,
-      })
+        dispatch(openSnackbar({message: "Message envoyé !"}))
+        dispatch({
+            type: NEW_MESSAGE_SENT,
+        })
     })
 }

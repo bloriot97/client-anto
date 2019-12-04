@@ -1,8 +1,8 @@
-import { SIGN_IN_ERROR, SIGN_IN_SUCESS, LOG_OUT_SUCESS } from './types'
+import { LOG_IN_ERROR, LOG_IN_SUCESS, LOG_OUT_SUCESS } from './types'
 import { getUri } from '../api'
 
 
-export const signIn = (userData) => (dispatch) => {
+export const logIn = (userData) => (dispatch) => {
   console.log(JSON.stringify(userData))
   fetch(getUri('/auth/login'), {
     method: 'POST',
@@ -18,13 +18,13 @@ export const signIn = (userData) => (dispatch) => {
 
         console.log('invalide login!')
         dispatch({
-          type: SIGN_IN_ERROR
+          type: LOG_IN_ERROR
         })
       } else {
         console.log(res)
         localStorage.setItem('token', res.token);
         dispatch({
-          type: SIGN_IN_SUCESS,
+          type: LOG_IN_SUCESS,
           payload: res,
         })
       }
