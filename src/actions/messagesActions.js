@@ -1,4 +1,4 @@
-import { FETCH_MESSAGES, NEW_MESSAGE_SENT } from './types'
+import { FETCH_MESSAGES, NEW_MESSAGE_SENT, NEW_MESSAGE_ERROR } from './types'
 import { openSnackbar } from "./snackbarActions";
 import { getUri } from '../api'
 
@@ -31,11 +31,20 @@ export const createMessage = (message) => (dispatch) => {
       'authorization': `Bearer ${localStorage.getItem("token")}`
     },
     body: JSON.stringify(message),
-  }).then((res) => res.json()).catch((err) => console.log(err))
+  }).then((res) => res.json())
+      .catch((err) => {
+          console.log(err)
+          dispatch(openSnackbar({message: "Ah !", variant: 'error'}))
+          dispatch({
+              type: NEW_MESSAGE_ERROR,
+          })
+      })
     .then((res) => {
-        dispatch(openSnackbar({message: "Message envoyé !"}))
-        dispatch({
-            type: NEW_MESSAGE_SENT,
-        })
+        if (res !== undefined){
+            dispatch(openSnackbar({message: "Message envoyé !", variant: 'success'}))
+            dispatch({
+                type: NEW_MESSAGE_SENT,
+            })
+        }
     })
 }

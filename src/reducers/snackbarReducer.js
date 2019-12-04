@@ -1,8 +1,9 @@
 import { SNACKBAR_OPEN, SNACKBAR_CLOSED } from '../actions/types'
 
 const initialState = {
-    isOpen: false,
+    isOpen: true,
     message: '',
+    variant: 'success'
 }
 
 export default function(state = initialState, action) {
@@ -11,6 +12,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 message: action.payload.message,
+                variant: action.payload.variant || 'info',
                 isOpen: true,
             };
         case SNACKBAR_CLOSED:
