@@ -5,13 +5,15 @@ import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+//import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Avatar from '@material-ui/core/Avatar';
+
+import red from '@material-ui/core/colors/red';
 
 import LockIcon from '@material-ui/icons/LockOutlined';
 
@@ -48,7 +50,10 @@ const styles = theme => ({
   submit: {
     marginTop: '20px',
     marginBottom: '20px',
-  }
+  },
+  loginError:{
+    color: red[500],
+  },
 });
 
 
@@ -91,10 +96,10 @@ class Auth extends Component {
 
   render () {
 
-    const { classes } = this.props;
+    const { classes, authError} = this.props;
     return (
       <main className={classes.root}>
-        <Paper className={classes.paper}>
+        <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockIcon />
           </Avatar>
@@ -117,11 +122,11 @@ class Auth extends Component {
                 value={this.state.password}
               />
             </FormControl>
-            <Typography variant="caption">
-              {
-                //Se créer un compte.
-              }
-            </Typography>
+            { authError &&
+              <Typography variant="caption" className={classes.loginError}>
+                Erreur de connexion.
+              </Typography>
+            }
             <Button
               type="submit"
               fullWidth
@@ -132,7 +137,7 @@ class Auth extends Component {
               Se connecter
             </Button>
           </form>
-        </Paper>
+        </div>
       </main>
     )
   }
@@ -140,14 +145,16 @@ class Auth extends Component {
 
 Auth.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  authError: PropTypes.bool.isRequired,
 }
 
 function mapStateToProps(state) {
 
-  const { isAuthenticated } = state.auth
+  const { isAuthenticated, authError } = state.auth
 
   return {
     isAuthenticated,
+    authError,
   }
 }
 

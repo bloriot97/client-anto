@@ -7,7 +7,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 
 import { createMessage } from '../actions/messagesActions'
@@ -33,6 +36,10 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  submit: {
+    marginTop: '20px',
+    marginBottom: '20px',
+  }
 });
 
 class NewMessage extends Component {
@@ -41,6 +48,7 @@ class NewMessage extends Component {
     this.state = {
       to: '',
       content: '',
+      animation: 'rainbow',
     }
 
     this.onChange = this.onChange.bind(this);
@@ -57,7 +65,7 @@ class NewMessage extends Component {
     const message = {
       to: this.state.to,
       content: this.state.content,
-      animation: 'rainbow',
+      animation: this.state.animation,
     }
     this.props.createMessage(message);
 
@@ -68,7 +76,7 @@ class NewMessage extends Component {
 
     return (
       <main className={classes.root}>
-        <Paper className={classes.paper}>
+        <div className={classes.paper}>
           <Typography variant="title" gutterBottom>
             Nouveau message
           </Typography>
@@ -79,6 +87,25 @@ class NewMessage extends Component {
               </Grid>
               <Grid item xs={12} md={12}>
                 <TextField required id="cardName" label="Message" name="content" onChange={this.onChange} value={this.state.content} fullWidth />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <FormControl className={classes.formControl} fullWidth>
+                  <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                    Animation
+                  </InputLabel>
+                  <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      name="animation"
+                      value={this.state.animation}
+                      onChange={this.onChange}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                  >
+                    <MenuItem value={'rainbow'}>Rainbow</MenuItem>
+                    <MenuItem value={'rainbow2'}>Rainbow2</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <Button
@@ -91,7 +118,7 @@ class NewMessage extends Component {
               Envoyer
             </Button>
           </form>
-        </Paper>
+        </div>
       </main>
     )
   }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+
 import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import PropTypes from "prop-types";
 
 const styles = theme => ({
   root: {
@@ -33,6 +36,15 @@ class HomePage extends Component {
   /* constructor(props) {
     super(props);
   }*/
+  constructor(props) {
+    super(props);
+
+    if (this.props.isAuthenticated){
+      this.props.history.push("/messages");
+    } else {
+      this.props.history.push("/login");
+    }
+  }
 
   render () {
     const { classes } = this.props;
@@ -52,4 +64,16 @@ class HomePage extends Component {
   }
 }
 
-export default withStyles(styles)(HomePage);
+HomePage.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+}
+
+function mapStateToProps(state) {
+  const { isAuthenticated } = state.auth
+
+  return {
+    isAuthenticated,
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(HomePage));
